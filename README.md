@@ -1,1 +1,42 @@
-IyBHdWlkZSBUb3VyaXN0aXF1ZSBQYXJpcwoKR3VpZGUgaW50ZXJhY3RpZiBkZXMgcGx1cyBiZWF1eCBlbmRyb2l0cyDDoCB2aXNpdGVyIMOgIFBhcmlzLCBkw6l2ZWxvcHDDqSBhdmVjIFJlYWN0LgoKIyMg8J+NoSBGb25jdGlvbm5hbGl0w6lzCgotIExpc3RlIGRlcyBhdHRyYWN0aW9ucyB0b3VyaXN0aXF1ZXMgcHJpbmNpcGFsZXMKLSBJbmZvcm1hdGlvbnMgZMOpdGFpbGzDqWVzIHBvdXIgY2hhcXVlIGxpZXUKLSBJbnN0cnVjdGlvbnMgZGUgdHJhbnNwb3J0Ci0gQ29uc2VpbHMgcHJhdGlxdWVzIHBvdXIgbGVzIHRvdXJpc3RlcwoKIyMg8J+SmCBUZWNobm9sb2dpZXMgdXRpbGlzw6llcwoKLSBSZWFjdAotIFRhaWx3aW5kIENTUwotIEx1Y2lkZSBSZWFjdCBwb3VyIGxlcyBpY8O0bmVzCgojIyDwn43xIFByb2NoYWluZXMgZm9uY3Rpb25uYWxpdMOpcwoKLSBbIF0gUGhvdG9zIHBvdXIgY2hhcXVlIGxpZXUKLSBbIF0gVmVyc2lvbiBtdWx0aWxpbmd1ZSAoRlIvRU4pCi0gWyBdIENhcnRlIGludGVyYWN0aXZlCi0gWyBdIEZpbHRyZXMgcGFyIGFycm9uZGlzc2VtZW50Ci0gWyBdIFBhZ2UgZGUgY29uc2VpbHMgcHJhdGlxdWVzIGTDqXRhaWxsw6llCgojIyDwn5K8IEluc3RhbGxhdGlvbgoKMS4gQ2xvbmV6IGxlIHJlcG9zaXRvcnkKYGBgYmFzaApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2l0YWNoaTQ0L3BhcmlzLXRvdXJpc3QtZ3VpZGUuZ2l0CmBgYAoKMi4gSW5zdGFsbGV6IGxlcyBkw6lwZW5kYW5jZXMKYGBgYmFzaApjZCBwYXJpcy10b3VyaXN0LWd1aWRlCm5wbSBpbnN0YWxsCmBgYAoKMy4gTGFuY2V6IGwnYXBwbGljYXRpb24KYGBgYmFzaApucG0gc3RhcnQKYGBg
+# Guide Touristique Paris
+
+Guide interactif des plus beaux endroits à visiter à Paris, développé avec React.
+
+## 🗼 Fonctionnalités
+
+- Liste des attractions touristiques principales
+- Informations détaillées pour chaque lieu
+- Instructions de transport
+- Conseils pratiques pour les touristes
+
+## 🚀 Technologies utilisées
+
+- React
+- Tailwind CSS
+- Lucide React pour les icônes
+
+## 📱 Prochaines fonctionnalités
+
+- [ ] Photos pour chaque lieu
+- [ ] Version multilingue (FR/EN)
+- [ ] Carte interactive
+- [ ] Filtres par arrondissement
+- [ ] Page de conseils pratiques détaillée
+
+## 💻 Installation
+
+1. Clonez le repository
+```bash
+git clone https://github.com/itachi44/paris-tourist-guide.git
+```
+
+2. Installez les dépendances
+```bash
+cd paris-tourist-guide
+npm install
+```
+
+3. Lancez l'application
+```bash
+npm start
+```
