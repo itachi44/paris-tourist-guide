@@ -1,37 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Train, Bus } from 'lucide-react';
+import { MapPin, Train, Bus, X, Map as MapIcon } from 'lucide-react';
 import { attractions } from '../data/attractions';
+import ImageCarousel from './ImageCarousel';
+import InteractiveMap from './InteractiveMap';
 
 const ParisAttractions = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [showMap, setShowMap] = useState(false);
+  const [selectedAttraction, setSelectedAttraction] = useState(null);
+
+  const openLightbox = (attraction, index) => {
+    setSelectedImage(attraction);
+    setSelectedImageIndex(index);
+  };
+
+  const handleAttractionClick = (attraction) => {
+    setSelectedAttraction(attraction);
+    const element = document.getElementById(`attraction-${attraction.name}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
       <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">Les Plus Beaux Endroits de Paris</h1>
       
+      {/* Toggle Map Button */}
+      <div className="flex justify-center mb-6">
+        <button
+          onClick={() => setShowMap(!showMap)}
+          className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg transition-colors duration-200"
+        >
+          <MapIcon className="w-5 h-5" />
+          {showMap ? 'Masquer la carte' : 'Afficher la carte'}
+        </button>
+      </div>
+
+      {/* Interactive Map */}
+      {showMap && (
+        <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
+          <InteractiveMap 
+            attractions={attractions}
+            onAttractionClick={handleAttractionClick}
+          />
+        </div>
+      )}
+      
       <div className="space-y-6">
-        {attractions.map((attraction, index) => (
-          <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+        {attractions.map((attraction) => (
+          <Card 
+            key={attraction.name} 
+            id={`attraction-${attraction.name}`}
+            className={`overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 
+              ${selectedAttraction?.name === attraction.name ? 'ring-2 ring-blue-500' : ''}`}
+          >
             <CardContent className="p-6">
-              <div className="flex items-start justify-between">
-                <div>
-                  <h2 className="text-2xl font-semibold text-gray-800 mb-2">{attraction.name}</h2>
-                  <div className="flex items-center text-gray-600 mb-2">
-                    <MapPin className="w-4 h-4 mr-2"/>
-                    <span>{attraction.quartier}</span>
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="w-full md:w-1/2">
+                  <div className="cursor-pointer" onClick={() => openLightbox(attraction, 0)}>
+                    <ImageCarousel images={attraction.images} />
                   </div>
                 </div>
-              </div>
-              
-              <p className="text-gray-600 mb-4 leading-relaxed">
-                {attraction.description}
-              </p>
-              
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="flex items-start space-x-2">
-                  <Train className="w-5 h-5 text-gray-500 mt-1"/>
-                  <p className="text-gray-600 text-sm">
-                    {attraction.transport}
+                <div className="w-full md:w-1/2">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h2 className="text-2xl font-semibold text-gray-800 mb-2">{attraction.name}</h2>
+                      <div className="flex items-center text-gray-600 mb-2">
+                        <MapPin className="w-4 h-4 mr-2"/>
+                        <span>{attraction.quartier}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    {attraction.description}
                   </p>
+                  
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <div className="flex items-start space-x-2">
+                      <Train className="w-5 h-5 text-gray-500 mt-1"/>
+                      <p className="text-gray-600 text-sm">
+                        {attraction.transport}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -39,6 +94,36 @@ const ParisAttractions = () => {
         ))}
       </div>
 
+      {/* Lightbox */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4" 
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-6xl w-full mx-auto" onClick={e => e.stopPropagation()}>
+            <button
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X className="w-8 h-8" />
+            </button>
+            
+            <div className="relative aspect-video">
+              <ImageCarousel 
+                images={selectedImage.images} 
+                autoplayDelay={6000}
+              />
+            </div>
+
+            <div className="text-white text-center mt-4">
+              <h3 className="text-xl font-semibold mb-2">{selectedImage.name}</h3>
+              <p className="text-sm text-gray-300">{selectedImage.quartier}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Tourist Tips */}
       <div className="mt-8 p-6 bg-gray-50 rounded-lg">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Conseils pour les Touristes</h2>
         <div className="space-y-3 text-gray-600">
